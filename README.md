@@ -17,7 +17,7 @@ Automated end-to-end test suite for the Sunbird Spark learning portal, built wit
 ### Cloning the repository and installing Node.js packages:
 ```bash
 git clone https://github.com/sho6000/MobileUI_automation
-git checkout testsuite-1
+git checkout testsuit-1
 cd app
 npm install
 ```
