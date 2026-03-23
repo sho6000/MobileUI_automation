@@ -1,0 +1,148 @@
+# Appium Test suite - Setup & Usage Guide
+
+Automated end-to-end test suite for the Sunbird Spark learning portal, built with WebdriverIO + Appium on Android Chrome (mobile view).
+
+---
+
+## Recommened Setup
+- Android Emulator — `Pixel_7_API_35` (Android 14)
+- Android Studio (for emulator setup)
+- Chrome browser on emulator
+
+---
+
+
+## Setup
+
+### Cloning the repository and installing Node.js packages:
+```bash
+git clone https://github.com/sho6000/MobileUI_automation
+git checkout testsuite-1
+cd app
+npm install
+```
+
+### Run complete test script
+```bash
+npm run wdio:suite
+```
+
+### Run individual scripts
+1. Course consumption
+```bash
+npm run wdio:android -- --spec course-consumption-any-content.e2e.ts
+```
+2. Certificate
+```bash
+npm run wdio:android -- --spec education-certificate-download.e2e.ts
+```
+3. Sync in Progress
+```bash
+npm run wdio:android -- --spec course-sync-progress-menu.e2e.ts
+```
+
+---
+
+## Project Structure
+```bash
+app/
+├── test/
+│   └── specs/
+│       ├── course-consumption-any-content.e2e.ts
+│       ├── education-certificate-download.e2e.ts
+│       └── course-sync-progress-menu.e2e.ts
+├── wdio.conf.ts
+├── wdio.android.conf.ts
+├── wdio.main.conf.ts
+└── package.json
+```
+
+---
+
+## Test Scripts Overview
+
+### 1. Course Consumption (`course-consumption-any-content.e2e.ts`)
+
+Tests the full course consumption flow — enrolls a user and consumes all content types to reach 100% completion.
+
+**Content types handled:** Video, YouTube, PDF, EPUB, H5P, HTML, Assessment
+
+**Test case:**
+
+| TC | Description |
+|---|---|
+| TC1 | Enroll → consume all content types → verify 100% completion |
+
+**Run:**
+- [Go here to run](#run-individual-scripts)
+
+
+**Course name can be changed via environment variable:**
+```bash
+COURSE_NAME="Your Course Name" npm run wdio:android -- --spec course-consumption-any-content.e2e.ts
+```
+
+---
+
+### 2. Certificate Download (`education-certificate-download.e2e.ts`)
+
+Tests certificate availability based on course completion and assessment score.
+
+**Test cases:**
+
+| TC | Description | Expected |
+|---|---|---|
+| TC1 & TC3 | 100% completed course → Download Certificate | ✅ Certificate downloads |
+| TC2 | Incomplete course → Check certificate | ✅ No certificate shown |
+| TC4 | 100% complete but low assessment score → Check certificate | ✅ "No certificate" shown (Neagtive) |
+
+**Run:**
+- [Go here to run](#run-individual-scripts)
+
+---
+
+### 3. Sync Progress Menu (`course-sync-progress-menu.e2e.ts`)
+
+Tests the 3-dot sync progress menu on a completed course.
+
+**Test cases:**
+
+| TC | Description | Expected |
+|---|---|---|
+| TC2 | 100% course → Click 3-dot menu → Sync progress now | ✅ Success toast appears |
+| TC3 | After sync → Check progress | ✅ Progress stays at 100% |
+| TC1 | Course < 100% → Click 3-dot menu → Check menu options | ✅ Shows "Leave course" NOT "Sync progress now" — ON HOLD (3-dot click unreliable) (Negative) |
+
+
+
+**Run:**
+- [Go here to run](#run-individual-scripts)
+
+---
+
+## Configuration
+
+Test credentials and URLs can be set via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `SUNBIRD_URL` | `https://test.sunbirded.org` | Portal URL |
+| `SUNBIRD_USERNAME` | `user1@yopmail.com` | Login email |
+| `SUNBIRD_PASSWORD` | `User1@123` | Login password |
+| `COURSE_NAME` | varies per script | Target course name |
+
+---
+
+## Dependencies
+
+| Package | Version | Purpose |
+|---|---|---|
+| `@wdio/cli` | `^9.24.0` | WebdriverIO CLI |
+| `@wdio/local-runner` | `^9.24.0` | Local test runner |
+| `@wdio/mocha-framework` | `^9.24.0` | Mocha test framework |
+| `@wdio/spec-reporter` | `^9.24.0` | Test reporter |
+| `@wdio/appium-service` | `^9.24.0` | Appium service |
+| `@wdio/visual-service` | `^9.1.6` | Visual testing |
+| `appium` | `^2.19.0` | Mobile automation |
+| `appium-uiautomator2-driver` | `^4.2.9` | Android driver |
+
