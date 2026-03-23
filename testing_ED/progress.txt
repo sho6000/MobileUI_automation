@@ -1,9 +1,0 @@
-Start an Appium session and launch the Sunbird Ed app on an Android Emulator.
-
-Go to the bottom magnifying icon and click and search for Course: "Course 10-03"
-
-Check the "Your progress section" and check what is the percentage is it and keep a track of it
-
-Continue with the course by clicking Start learning
-
-After completing single unit, go back to the main course page and check if the  progress percentage is changed

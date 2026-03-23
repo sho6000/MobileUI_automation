@@ -1,7 +1,0 @@
-Start an Appium session and launch the Sunbird Ed app on an Android Emulator.
-
-Click on the Profile at the bottom and click
-
-if Login button not visible, execute vertical scroll gestures (swipe upward) until the blue LOGIN button element is visible in the viewport.
-
-Login with valid credentials (email: user2@yopmail.com, password: User2@123).

@@ -1,7 +1,0 @@
-Click on the Spark Portal (its a website shortcut) which is located in the mobile home screen
-
-After its opened, Click on the 3 lines button on the top left corner
-
-Click on the Login button, enter the login details
-
-Login with valid credentials (email: user1@yopmail.com, password: User1@123)
