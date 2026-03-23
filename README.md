@@ -27,8 +27,9 @@ npm install
 appium driver install uiautomator2
 ```
 
-
 ### wdio.android.conf.ts modification
+
+Update with your deviceName & appium:udid to connect the scirpt to the chrome browser
 ```ts
 capabilities: [
     {
@@ -39,7 +40,7 @@ capabilities: [
       "appium:deviceName": "Pixel_7_API_35",
       "appium:platformVersion": "14",
       "appium:automationName": "UiAutomator2",
-      "appium:udid": "emulator-5554",
+    //   "appium:udid": "UPDATE HERE",
       "appium:chromedriverAutodownload": true,
       "appium:newCommandTimeout": 600,
       "appium:noReset": false,
@@ -57,9 +58,6 @@ capabilities: [
     "wdio:suite": "wdio run ./wdio.main.conf.ts"
   }
 ```
-
-### wdio.conf.js
-wd
 
 ### Run complete test script
 ```bash
