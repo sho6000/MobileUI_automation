@@ -1,0 +1,153 @@
+TEST CASE DESCRIPTION:
+Verify that user is displayed with the kebab menu in the course progress section once courses consumed 100%
+Verify that when user clicks on the Kebab menu "Sync progress now" is deactivated/disabled till the user hits 100% completion. Once the user reaches 100%, activate this option.
+Verify that user is able to click on the "Sync progress now" and the progress is synced.
+
+PRECONDITIONS:
+User should have enrolled to a course
+Android emulator is running
+Application is installed
+Valid user credentials available
+
+TEST DATA:
+Username: user2@yopmail.com
+Password: User2@123
+Course name: Test Course for 6th January
+
+APPIUM TEST STEPS:
+STEP 1: LAUNCH AND LOGIN
+
+1. Launch the Sunbird application on Android emulator
+2. Wait for app home screen to load (max 15 seconds)
+3. Locate and tap "Profile" or "Login" button
+4. Wait for login screen to appear
+5. Locate email/username input field and enter credentials
+6. Locate password input field and enter password
+7. Tap "LOGIN" button to authenticate
+8. Wait for successful authentication (verify dashboard loads)
+9. Assert login successful (check for user profile icon)
+STEP 2: NAVIGATE TO ENROLLED COURSE
+
+1. Locate "My Courses" or "Library" tab in bottom navigation
+2. Tap on "My Courses" tab
+3. Wait for courses list to load
+4. IF enrolled course NOT visible on screen:
+   {
+       Execute vertical scroll (swipe up) until course card appears
+   }
+5. Locate enrolled course card by course name
+6. Tap on the course card to open course details
+7. Wait for course TOC (Table of Contents) page to load
+STEP 3: CONSUME COURSE TO 100% (IF NOT ALREADY COMPLETED)
+
+LOOP: WHILE overall progress < 100%
+{
+    1. Check "Your Progress" section for current completion percentage
+    2. IF progress < 100%:
+       {
+           INNER_LOOP: FOR EACH course module/unit with incomplete status
+           {
+               a. Locate course unit without green checkmark
+               b. Tap on the course unit to open content
+               c. Wait for content to load (5-10 seconds)
+               
+               d. IDENTIFY content type and consume:
+               
+               IF content_type == "Video" (MP4/YouTube/WebM):
+               {
+                   i. Tap play button
+                   ii. Wait for video to buffer and start
+                   iii. OPTION 1: Let video play to completion
+                   iv. OPTION 2: Seek to end (drag progress bar to 95-100%)
+                   v. Wait for completion indicator (green checkmark)
+                   vi. Tap back button
+               }
+               
+               IF content_type == "PDF/Resource":
+               {
+                   i. Wait for PDF viewer to load
+                   ii. Swipe left (or tap next) through all pages
+                   iii. Continue until last page or "Completed" message
+                   iv. Wait 2-3 seconds for progress to register
+                   v. Tap back button
+               }
+               
+               IF content_type == "HTML":
+               {
+                   i. View HTML content (auto-loads)
+                   ii. Scroll through content if needed
+                   iii. Wait 5 seconds for progress tracking
+                   iv. Tap back or hamburger menu → Exit
+               }
+               
+               IF content_type == "H5P/Interactive":
+               {
+                   i. Wait for H5P to load (10-15 seconds)
+                   ii. Complete all interactions (answer questions, navigate slides)
+                   iii. Wait for completion confirmation
+                   iv. Tap back button
+               }
+               
+               IF content_type == "Assessment":
+               {
+                   i. Tap on assessment
+                   ii. Answer all questions (select any options)
+                   iii. Tap "Submit" button
+                   iv. View results/score
+                   v. Tap "Close" or back button
+               }
+               
+               e. Verify course unit shows green checkmark/completion status
+               f. IF unexpected popup appears: Tap X or dismiss button
+               g. Return to course TOC page
+           }
+       }
+    3. Scroll to "Your Progress" section
+    4. Verify progress percentage updated
+    5. Continue until progress shows 100%
+}
+STEP 4: VERIFY KEBAB MENU APPEARS AT 100%
+
+1. Ensure course progress shows 100% completion
+2. Scroll to "Your Progress" section (top of course page)
+3. Verify text displays: "You have successfully completed this course"
+4. Locate kebab menu icon (three vertical dots) in progress section
+5. Assert kebab menu icon IS visible
+6. CHECKPOINT: Kebab menu appears at 100% completion ✓
+7. Capture screenshot for evidence
+STEP 5: VERIFY "SYNC PROGRESS NOW" IS ENABLED AT 100%
+
+1. Tap on kebab menu icon (three dots)
+2. Wait for menu dropdown to appear (1-2 seconds)
+3. Locate "Sync progress now" option in menu list
+4. Verify "Sync progress now" is NOT grayed out/disabled
+5. Assert text color indicates enabled state (not light gray)
+6. Assert option is clickable/accessible
+7. CHECKPOINT: "Sync progress now" enabled at 100% ✓
+8. Capture screenshot of menu
+STEP 6: VERIFY SYNC FUNCTIONALITY
+
+1. With kebab menu open, tap "Sync progress now" option
+2. Wait for sync operation to execute
+3. Look for success indicators:
+   - Toast message: "Progress synced successfully" or similar
+   - Loading spinner appears and disappears
+   - Progress timestamp updates
+   - Menu closes automatically
+4. IF toast message appears:
+   {
+       Assert message contains "sync" or "success"
+       Wait for toast to disappear (3-5 seconds)
+   }
+5. Tap back or close to exit course
+6. Re-open same course (optional verification)
+7. Verify progress still shows 100%
+8. CHECKPOINT: Sync operation successful ✓
+EXPECTED RESULTS:
+✓ Kebab menu (three dots) is visible in course progress section at 100% completion ✓ "Sync progress now" option is enabled/accessible at 100% (not disabled) ✓ Clicking "Sync progress now" successfully syncs progress ✓ Success confirmation displayed (toast message or visual feedback)
+
+ERROR HANDLING:
+IF kebab menu not found: Scroll up/down in progress section, verify 100% completion
+IF "Sync progress now" disabled: Verify actual progress is exactly 100%
+IF sync fails: Check network connectivity, retry operation
+IF toast message doesn't appear: Check for alternative success indicators

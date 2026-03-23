@@ -1,0 +1,112 @@
+TEST CASE DESCRIPTION:
+Verify that the timer is displayed post Join Course and timer should appear "Y" amount of time before the expiry in X days Y Hours Z mins for batch which is about to expire
+
+PRECONDITIONS:
+Course batch has been created with batch end date
+Batch is approaching expiry (within timer threshold)
+User has valid credentials
+
+TEST DATA:
+Username: [specify]
+Password: [specify]
+Course with batch end date approaching
+
+STEP 1: LOGIN TO APPLICATION
+
+1. Launch Sunbird application on Android emulator
+2. Wait for home screen to load
+3. Tap "Login" button
+4. Enter credentials:
+   - Email field: Enter username
+   - Password field: Enter password
+5. Tap "LOGIN" button
+6. Wait for successful authentication
+7. Verify dashboard/home screen loaded
+STEP 2: SEARCH FOR COURSE WITH BATCH END DATE
+
+1. Tap "Courses" or "Library" tab
+2. IF search needed:
+   {
+       Tap search icon
+       Enter course name with expiring batch
+       Wait for results
+   }
+   ELSE:
+   {
+       Scroll through available courses
+       Look for course with expiring batch
+   }
+3. Locate target course card
+4. Tap on course card
+5. Wait for course details page to load
+STEP 3: JOIN COURSE AND CHECK FOR TIMER
+
+1. On course details page, locate "Join Course" button
+2. Tap "Join Course" button
+3. IF consent popup appears:
+   {
+       Review consent
+       Tap "Accept" or "I Agree"
+   }
+4. Wait for enrollment confirmation (2-3 seconds)
+5. Observe course details page after enrollment
+6. Look for timer display in following locations:
+   - Near course title/header
+   - In progress section
+   - Below "Start Learning" button
+   - In banner/notification area
+7. IF timer visible:
+   {
+       a. Verify timer format: "X days Y hours Z mins" or similar
+       b. Verify timer shows countdown to batch end
+       c. Note timer values
+       d. Capture screenshot
+   }
+   ELSE:
+   {
+       a. Verify no timer displayed
+       b. Note: Timer may only show within specific threshold (e.g., 7 days before expiry)
+       c. Capture screenshot
+   }
+STEP 4: VERIFY TIMER APPEARS AT APPROPRIATE THRESHOLD
+
+1. Check batch end date information
+2. Calculate time remaining until batch expiry
+3. IF time remaining <= timer threshold (e.g., 7 days):
+   {
+       Assert timer IS displayed
+       Verify countdown is accurate
+   }
+   ELSE IF time remaining > timer threshold:
+   {
+       Assert timer is NOT displayed (or shows generic message)
+   }
+4. Capture screenshot for evidence
+STEP 5: ENTER COURSE AND VERIFY TIMER PERSISTENCE
+
+1. Tap "Start Learning" button
+2. Wait for course TOC to load
+3. Check if timer is also displayed in course TOC:
+   - Top of page
+   - Progress section
+   - Banner area
+4. Verify timer consistency with details page
+5. Capture screenshot if timer present
+STEP 6: VERIFY TIMER COUNTDOWN (OPTIONAL)
+
+1. Note current timer values (e.g., "2 days 5 hours 30 mins")
+2. Wait for 1-2 minutes
+3. Refresh course page (swipe down or navigate away and back)
+4. Check if timer updated (minutes decreased)
+5. Verify countdown is functional
+EXPECTED RESULTS:
+✓ Timer is displayed after joining course (if within threshold) ✓ Timer shows format: "X days Y hours Z mins" before expiry ✓ Timer appears "Y" amount of time before batch end (per configuration) ✓ Timer countdown is accurate and updates ✓ Timer visible in appropriate locations (details page, TOC)
+
+ACTUAL BEHAVIOR (as per comments):
+After Join Course, no timer is displayed
+Only "Start Learning" button shown
+Timer may not be implemented or threshold not met
+ERROR HANDLING:
+IF timer not visible: Check batch end date, verify within threshold
+IF timer format incorrect: Capture and report discrepancy
+IF timer not counting: Refresh page, verify timer updates

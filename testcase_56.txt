@@ -1,0 +1,43 @@
+# TC_56: Course Progress Sync Verification
+
+## Test Objective
+Verify kebab menu appears at 100% course completion and "Sync progress now" option is enabled and functional.
+
+---
+
+## Test Steps
+
+Start an Appium session and launch the Sunbird Ed app on an Android Emulator.
+
+Click on the Profile at the bottom and click
+
+if Login button not visible, execute vertical scroll gestures (swipe upward) until the blue LOGIN button element is visible in the viewport.
+
+Login with valid credentials (email: user2@yopmail.com, password: User2@123).
+
+Navigate to "My Courses" and select an enrolled course.
+
+Consume all course content to reach 100% completion.
+
+Verify "You have successfully completed this course" message appears.
+
+Locate and click the kebab menu (3 dots) in the course progress section.
+
+Verify "Sync progress now" option is enabled (not grayed out).
+
+Click on "Sync progress now" option.
+
+Verify success message appears (toast notification or confirmation).
+
+End the session.
+
+---
+
+## Expected Results
+- Kebab menu is visible at 100% completion
+- "Sync progress now" option is enabled and clickable
+- Sync operation executes successfully with confirmation message
+
+---
+
+After completing the above steps, write all these steps as an E2E test case using Appium & WebdriverIO.

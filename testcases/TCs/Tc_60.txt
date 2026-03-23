@@ -1,0 +1,114 @@
+TEST CASE DESCRIPTION:
+Verify that user can unenroll from open courses
+
+PRECONDITIONS:
+User should have Sunbird account
+Open enrollment courses available
+User credentials valid
+
+TEST DATA:
+Username: [specify]
+Password: [specify]
+
+STEP 1: LOGIN TO APPLICATION
+
+1. Launch Sunbird application on Android emulator
+2. Wait for home screen to load (15 seconds max)
+3. Tap "Login" or "Sign In" button
+4. Wait for login screen to appear
+5. Enter credentials:
+   - Email/username field: Enter username
+   - Password field: Enter password
+6. Tap "LOGIN" button
+7. Wait for authentication to complete
+8. Verify dashboard/home page loaded successfully
+STEP 2: NAVIGATE TO COURSES
+
+1. Tap "Courses" tab in bottom navigation
+2. Wait for courses page to load (5-10 seconds)
+3. Verify courses page displayed
+STEP 3: FIND AND ENROLL IN OPEN COURSE
+
+1. Scroll down courses page
+2. Look for "Open for Enrollment" section
+3. IF section not visible:
+   {
+       Execute vertical scroll (swipe up)
+       Continue until "Open for Enrollment" section appears
+   }
+4. Locate any course card in "Open for Enrollment" section
+5. Note course name: enrolled_course_name
+6. Tap on course card
+7. Wait for course details to load
+8. Verify "Enroll" or "Join Course" button visible
+9. Tap "Enroll"/"Join Course" button
+10. IF consent popup appears:
+    {
+        Review information
+        Tap "Accept" or "I Agree"
+    }
+11. Wait for enrollment confirmation (2-3 seconds)
+12. Verify "Start Learning" button appears
+13. Capture screenshot: "course_enrolled.png"
+STEP 4: CONSUME COURSE PARTIALLY
+
+1. Tap "Start Learning" button
+2. Wait for course TOC to load
+3. Select first content unit in course
+4. Tap on content unit to open
+5. Consume partially:
+   - IF video: Play for 30-60 seconds, then exit
+   - IF PDF: View 1-2 pages, then exit
+   - IF HTML: View for 10 seconds, then exit
+6. Tap back button to return to TOC
+7. Verify partial progress registered (progress bar or percentage)
+8. Capture screenshot showing partial consumption
+9. Tap back button to course details page
+STEP 5: UNENROLL FROM COURSE
+
+1. On course details page, look for "Unenroll" button
+2. IF "Unenroll" not immediately visible:
+   {
+       Scroll down page
+       OR look for kebab menu (three dots)
+       OR check in course options
+   }
+3. Tap "Unenroll" button
+4. Wait for confirmation dialog to appear (1-2 seconds)
+STEP 6: CONFIRM UNENROLLMENT
+
+1. Verify confirmation dialog displays:
+   - Message: "Are you sure you want to unenroll?"
+   - Two options: "Cancel" and "Unenroll" (or "Yes"/"No")
+2. Read confirmation message
+3. Tap "Unenroll" option in dialog
+4. Wait for unenrollment to process (2-3 seconds)
+5. Observe result:
+   - IF success toast: Note message
+   - IF page redirects: Note destination
+STEP 7: VERIFY UNENROLLMENT SUCCESSFUL
+
+1. Check course details page status
+2. Verify "Enroll" or "Join Course" button is NOW visible again
+   (Indicates user is no longer enrolled)
+3. Tap back button to courses list
+4. Navigate to "My Courses" section
+5. Verify enrolled_course_name is NOT in "My Courses" list
+6. Capture screenshot: "course_unenrolled.png"
+7. CHECKPOINT: Unenrollment successful ✓
+STEP 8: VERIFY COURSE STILL ACCESSIBLE (OPTIONAL)
+
+1. Go back to "Courses" tab
+2. Search for or navigate to same course
+3. Tap on course card
+4. Verify course details still accessible
+5. Verify "Enroll" button available (can re-enroll)
+6. Verify previous progress is NOT shown (fresh enrollment state)
+EXPECTED RESULTS:
+✓ User can locate "Unenroll" button on enrolled course ✓ Confirmation dialog appears asking to confirm unenrollment ✓ After confirming, user is successfully unenrolled ✓ "Enroll" button reappears on course (can re-enroll) ✓ Course removed from "My Courses" section ✓ Success message or confirmation displayed
+
+ERROR HANDLING:
+IF "Unenroll" not found: Check user is actually enrolled, look in menus
+IF confirmation dialog doesn't appear: Retry tap on unenroll
+IF unenrollment fails: Check network, retry operation
+IF course still in "My Courses": Refresh list, verify server sync

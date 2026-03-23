@@ -1,0 +1,13 @@
+1) The user should receive "course merit certificate" on consuming a course to 100% and scoring more than merit criteria in the assessment
+
+2) The user shouldn't receive "course completion certificate" on consuming a course to 100% and scoring less than merit criteria in the assessment.
+
+3) The user should be able to download the certificate from the learner's passbook section on the profile page with correct information on the below sections.
+
+* Course Name
+* Certificate given by
+* Certificate issue date
+
+4) Logged user/guest should show the certificate rule before/after joining the course in seperate section with show more option 
+
+
