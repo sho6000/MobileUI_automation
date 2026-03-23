@@ -22,6 +22,45 @@ cd app
 npm install
 ```
 
+### Install
+```bash
+appium driver install uiautomator2
+```
+
+
+### wdio.android.conf.ts modification
+```ts
+capabilities: [
+    {
+      platformName: "Android",
+
+      browserName: "chrome", 
+
+      "appium:deviceName": "Pixel_7_API_35",
+      "appium:platformVersion": "14",
+      "appium:automationName": "UiAutomator2",
+      "appium:udid": "emulator-5554",
+      "appium:chromedriverAutodownload": true,
+      "appium:newCommandTimeout": 600,
+      "appium:noReset": false,
+    },
+  ]
+```
+
+### package.json modification
+```ts
+"scripts": {
+    "wdio": "wdio run ./wdio.conf.js",
+    
+    // Add below files for the installed android emulator and the main test script file
+    "wdio:android": "wdio run ./wdio.android.conf.ts",
+    "wdio:suite": "wdio run ./wdio.main.conf.ts"
+  }
+```
+
+### wdio.conf.js
+wd
+
 ### Run complete test script
 ```bash
 npm run wdio:suite
