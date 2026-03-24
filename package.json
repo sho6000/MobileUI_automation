@@ -18,7 +18,7 @@
     "wdio:suite": "wdio run ./wdio.main.conf.ts"
   },
   "dependencies": {
-    "@gavrix/appium-mcp": "^0.3.0"
+    "@gavrix/appium-mcp": "^0.3.0",
+    "dotenv": "^17.3.1"
   }
 }
-

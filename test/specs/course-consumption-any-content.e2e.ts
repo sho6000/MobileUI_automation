@@ -1,4 +1,7 @@
 // @ts-nocheck
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import { $, $$, browser, expect } from "@wdio/globals";
 
 function normalizeText(value: string) {
@@ -1763,7 +1766,7 @@ describe("Multi-Type Course Consumption", () => {
     const baseUrl    = process.env.SUNBIRD_URL      || "https://test.sunbirded.org";
     const username   = process.env.SUNBIRD_USERNAME  || "user1@yopmail.com";
     const password   = process.env.SUNBIRD_PASSWORD  || "User1@123";
-    const courseName = process.env.COURSE_NAME       || "Video H64";
+    const courseName = process.env.COURSE_NAME      
 
     await loginToPortal(username, password, baseUrl);
     console.log("✅ Logged in");

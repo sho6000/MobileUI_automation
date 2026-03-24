@@ -1,6 +1,12 @@
 import { config as baseConfig } from "./wdio.android.conf.ts";
 import type { Options } from "@wdio/types";
 
+// @ts-nocheck
+import * as dotenv from "dotenv";
+dotenv.config();
+
+import { $, $$, browser, expect } from "@wdio/globals";
+
 // Track results across all spec files
 const suiteResults: {
   spec: string;
@@ -63,7 +69,7 @@ export const config: WebdriverIO.Config = {
 
     console.log("\n");
     console.log(divider);
-    console.log("         📋  SUNBIRD E2E TEST SUITE — FINAL SUMMARY");
+    console.log("         SUNBIRD E2E TEST SUITE — FINAL SUMMARY");
     console.log(divider);
 
     const scriptLabels: Record<string, string> = {

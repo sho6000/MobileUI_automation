@@ -1,4 +1,7 @@
 // @ts-nocheck
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import { $, $$, browser, expect } from "@wdio/globals";
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -789,9 +792,9 @@ async function findCourseCardInfoOrAbsent(courseName: string): Promise<{
 
 describe("Certificate Download Tests", () => {
 
-  const baseUrl  = "https://test.sunbirded.org";
-  const username = "user1@yopmail.com";
-  const password = "User1@123";
+  const baseUrl  = process.env.SUNBIRD_URL  || "https://test.sunbirded.org";
+  const username     = process.env.SUNBIRD_USERNAME   || "user1@yopmail.com";
+  const password     = process.env.SUNBIRD_PASSWORD   || "User1@123";
 
   // ── TC1 + TC3 ─────────────────────────────────────────────────────────────
   it("TC1 & TC3: Should download certificate for 100% completed course", async function () {
@@ -841,7 +844,7 @@ describe("Certificate Download Tests", () => {
   it("TC2: Should NOT show Download Certificate when course is incomplete", async function () {
     this.timeout(180000);
 
-    const incompleteCourse = process.env.INCOMPLETE_COURSE || "Video H62";
+    const incompleteCourse = process.env.INCOMPLETE_COURSE 
 
     // Use search from current page — already logged in from TC1
     console.log(`\n🔍 Step 1: Search for incomplete course "${incompleteCourse}"`);
@@ -884,7 +887,7 @@ describe("Certificate Download Tests", () => {
   it("TC4: Should NOT show Download Certificate when assessment score is low despite 100%", async function () {
     this.timeout(180000);
 
-    const lowScoreCourse = process.env.LOW_SCORE_COURSE || "Examination 26 AI";
+    const lowScoreCourse = process.env.LOW_SCORE_COURSE 
 
     // Use search from current page — already logged in
     console.log(`\n🔍 Step 1: Search for low score course "${lowScoreCourse}"`);

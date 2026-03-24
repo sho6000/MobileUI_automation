@@ -18,18 +18,37 @@ Automated end-to-end test suite for the Sunbird Spark learning portal, built wit
 ```bash
 git clone https://github.com/sho6000/MobileUI_automation
 git checkout testsuit-1
-cd app
-npm install
 ```
 
 ### Install
 ```bash
+npm install
 appium driver install uiautomator2
 ```
 
+### package.json modification
+```ts
+"scripts": {
+    "wdio": "wdio run ./wdio.conf.js",
+    
+    // Add below files for the installed android emulator and the main test script file
+    // Android connecter file
+    "wdio:android": "wdio run ./wdio.android.conf.ts",
+    // Combined test suite
+    "wdio:suite": "wdio run ./wdio.main.conf.ts"
+  }
+```
+
+
+
 ### wdio.android.conf.ts modification
 
-Update with your deviceName & appium:udid to connect the scirpt to the chrome browser
+To find emulator udid after running the android instance
+```cmd
+adb devices -l
+```
+
+Cross-check with your deviceName & `appium:udid` to connect the scirpt to the chrome browser
 ```ts
 capabilities: [
     {
@@ -46,17 +65,6 @@ capabilities: [
       "appium:noReset": false,
     },
   ]
-```
-
-### package.json modification
-```ts
-"scripts": {
-    "wdio": "wdio run ./wdio.conf.js",
-    
-    // Add below files for the installed android emulator and the main test script file
-    "wdio:android": "wdio run ./wdio.android.conf.ts",
-    "wdio:suite": "wdio run ./wdio.main.conf.ts"
-  }
 ```
 
 ### Run complete test script
@@ -161,12 +169,24 @@ Tests the 3-dot sync progress menu on a completed course.
 
 Test credentials and URLs can be set via environment variables:
 
+### Create .env file following the below requirements
+-  `COMPLETE_COURSE` Must be 100% completed course
+-  `INCOMPLETE_COURSE` 
+- - Must be course with less than 100% completion
+- `LOW_SCORE_COURSE`
+- - Course should be 100% but should _not_ have 100% assessment score
+
 | Variable | Default | Description |
 |---|---|---|
 | `SUNBIRD_URL` | `https://test.sunbirded.org` | Portal URL |
 | `SUNBIRD_USERNAME` | `user1@yopmail.com` | Login email |
 | `SUNBIRD_PASSWORD` | `User1@123` | Login password |
-| `COURSE_NAME` | varies per script | Target course name |
+| `COURSE_NAME` | varies per script | Target course name for **course-consumption** |
+|---|---|---|
+| `COMPLETE_COURSE` | varies per script | Target course name for **sync-progress** |
+| `INCOMPLETE_COURSE` | varies per script | Target course name for **sync-progress** |
+|---|---|---|
+| `LOW_SCORE_COURSE` | varies per script | Target course name for **certificate-download** |
 
 ---
 

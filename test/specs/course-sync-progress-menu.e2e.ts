@@ -1,4 +1,7 @@
 // @ts-nocheck
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import { $, $$, browser, expect } from "@wdio/globals";
 
 function normalizeText(value: string) {
@@ -519,8 +522,8 @@ describe("Course Sync Progress - 3-dot Menu", () => {
   const baseUrl      = process.env.SUNBIRD_URL         || "https://test.sunbirded.org";
   const username     = process.env.SUNBIRD_USERNAME   || "user1@yopmail.com";
   const password     = process.env.SUNBIRD_PASSWORD   || "User1@123";
-  const courseName   = process.env.COMPLETE_COURSE    || "Education"; // Must be 100% complete
-  const incompleteCourse = process.env.INCOMPLETE_COURSE || "Video H62"; // Not 100% complete
+  const courseName   = process.env.COMPLETE_COURSE    
+  const incompleteCourse = process.env.INCOMPLETE_COURSE 
 
   // Login ONCE before all tests
   before(async function () {
